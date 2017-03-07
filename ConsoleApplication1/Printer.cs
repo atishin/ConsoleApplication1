@@ -125,6 +125,10 @@ namespace ConsoleApplication1
 
         private void PrintReceipt(BinaryWriter bw)
         {
+            if (cabinet.Length == 1) cabinet = " " + cabinet + " ";
+            if (cabinet.Length == 2) cabinet += " ";
+            if (ticket.Length == 1) ticket = "  " + ticket;
+            if (ticket.Length == 2) ticket = " " + ticket;
             bw.Enlarged(GetString(CenterString("Кабинет   Талон", Fonts.Enlarge)));
             bw.LargeText(GetString(CenterString(cabinet + "      " + ticket, Fonts.Large)));
             bw.FeedLines(1);

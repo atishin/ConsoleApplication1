@@ -17,19 +17,29 @@ namespace ConsoleApplication1
         static Printer printer = new Printer();
         static void Main(string[] args)
         {
+            var signalrHost = "http://localhost:59874/";
+            var operator_name = "Поликлиника №30";
+            if (args.Length != 0)
+            {
+                signalrHost = args[0];
+            }
+            if (args.Length > 1)
+            {
+                operator_name = args[1];
+            }
 
             var printer = new Printer()
             {
                 mo_name = "Поликлиника №30",
-                operator_name = "Поликлиника №30"
+                operator_name = operator_name
             };
 
-            ConnectSignalR();
+            ConnectSignalR(signalrHost, operator_name);
         }
 
-        static void ConnectSignalR()
+        static void ConnectSignalR(string host, string operator_name)
         {
-            var connection = new HubConnection("http://localhost:59874/");
+            var connection = new HubConnection(host);
             //Make proxy to hub based on hub name on server
             var myHub = connection.CreateHubProxy("VisitsHub");
             //Start connection
@@ -47,27 +57,32 @@ namespace ConsoleApplication1
 
             }).Wait();
 
-            myHub.On<dynamic>("ticketNotify", param => {
-
-                DateTime date = param.RegisteredOn;
-                printer.date = date.ToString("dd.MM.yyyy");
-                printer.time = date.ToString("hh:mm");
-
-                printer.ticket = param.TicketNumber;
-
-                printer.patient_line_1 = param.Patient.Person.LastName;
-                printer.patient_line_2 = param.Patient.Person.FirstName;
-                printer.patient_line_3 = param.Patient.Person.MidleName;
-
-                printer.doctor_line_1 = param.Employee.Person.LastName;
-                printer.doctor_line_2 = param.Employee.Person.FirstName;
-                printer.doctor_line_3 = param.Employee.Person.MidleName;
-                if (param.Employee.Cabinet != null)
+            myHub.On<dynamic, int>("ticketNotify", (param, act) => {
+                if (act == 0)
                 {
-                    printer.cabinet = param.Employee.Cabinet.Title;
+                    DateTime date = param.RegisteredOn;
+                    printer.date = date.ToString("dd.MM.yyyy");
+                    printer.time = date.ToString("hh:mm");
+
+                    printer.ticket = param.TicketNumber;
+
+                    printer.patient_line_1 = param.Patient.Person.LastName;
+                    printer.patient_line_2 = param.Patient.Person.FirstName;
+                    printer.patient_line_3 = param.Patient.Person.MidleName;
+
+                    printer.doctor_line_1 = param.Employee.Person.LastName;
+                    printer.doctor_line_2 = param.Employee.Person.FirstName;
+                    printer.doctor_line_3 = param.Employee.Person.MidleName;
+                    printer.mo_name = "Поликлиника №30";
+                    printer.operator_name = operator_name;
+                    if (param.Employee.Cabinet != null)
+                    {
+                        printer.cabinet = param.Employee.Cabinet.Title;
+                    }
+                    printer.Print();
+                    Console.WriteLine(param);
                 }
-                printer.Print();
-                Console.WriteLine(param);
+                
             });
 
             Console.Read();
