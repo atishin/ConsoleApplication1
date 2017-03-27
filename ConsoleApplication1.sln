@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaizenTalonClient", "KaizenTalonClient\KaizenTalonClient.csproj", "{6F2E5959-860E-43CE-AC33-9DE04D89F2B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalonService", "TalonService\TalonService.csproj", "{393E51C5-E5D7-4E99-97CF-B7040E76D315}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6F2E5959-860E-43CE-AC33-9DE04D89F2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F2E5959-860E-43CE-AC33-9DE04D89F2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F2E5959-860E-43CE-AC33-9DE04D89F2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{393E51C5-E5D7-4E99-97CF-B7040E76D315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{393E51C5-E5D7-4E99-97CF-B7040E76D315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{393E51C5-E5D7-4E99-97CF-B7040E76D315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{393E51C5-E5D7-4E99-97CF-B7040E76D315}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
