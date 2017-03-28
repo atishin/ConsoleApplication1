@@ -19,24 +19,29 @@ namespace KaizenTalonClient
 
         private SignalRProvider sProvider;
 
+        private Printer _printer;
+
         public Form1()
         {
             InitializeComponent();
 
+            _printer = Program.Printer;
+
             var host = System.Configuration.ConfigurationManager.AppSettings["url"];
 
-            Program.Printer.mo_name = "Поликлиника №30";
+            _printer.mo_name = "Поликлиника №30";
 
             sProvider = new SignalRProvider()
             {
                 host = host,
-                printer = Program.Printer,
-                operator_name = Program.Printer.mo_name,
+                printer = _printer,
+                operator_name = _printer.mo_name,
                 IsActive = isActive
             };
 
             sProvider.LogInfo += SProvider_LogInfo;
 
+            sProvider.Connect();
         }
 
         private void SProvider_LogInfo(object sender, string e)
@@ -46,11 +51,11 @@ namespace KaizenTalonClient
 
         private void btn_main_Click(object sender, EventArgs e)
         {
-            if (isStarted)
+            if (!isStarted)
             {
                 isStarted = true;
                 
-                sProvider.Connect();
+                //sProvider.Connect();
             }
 
             isActive = !isActive;
