@@ -11,7 +11,7 @@ namespace TalonService
 {
     public class Printer
     {
-        public string printerName { get; set; } = "SUNPHOR";
+        public string printerName { get; set; } = "POS-59";
         public string cabinet { get; set; } = "";
         public string ticket { get; set; } = "";
         public string time { get; set; } = "";

@@ -58,8 +58,9 @@ namespace TalonService
                     try
                     {
                         DateTime date = param.RegisteredOn;
+                        //DateTime.Now.ToString("dd.MM.yyyy HH:mm")
                         printer.date = date.ToString("dd.MM.yyyy");
-                        printer.time = date.ToString("hh:mm");
+                        printer.time = date.ToString("HH:mm");
 
                         printer.ticket = param.TicketNumber;
 

@@ -46,7 +46,7 @@ namespace KaizenTalonClient
 
         private void SProvider_LogInfo(object sender, string e)
         {
-            tb_log.Text += "\n" + e;
+            //tb_log.Text += "\n" + e;
         }
 
         private void btn_main_Click(object sender, EventArgs e)
