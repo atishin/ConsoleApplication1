@@ -18,6 +18,8 @@ namespace TalonService
 
         public bool IsActive { get; set; }
 
+        public string operator_email { get; set; }
+
         public event EventHandler<string> LogInfo;
 
         ~SignalRProvider()
@@ -48,12 +50,12 @@ namespace TalonService
 
             }).Wait();
 
-            myHub.On<dynamic, int>("ticketNotify", (param, act) => {
+            myHub.On<dynamic, int, DateTime?, string, string, string>("ticketNotify", (param, act, ticketDate, _operator_name, _operator_email, _employee_position) => {
 
                 if (!IsActive)
                     return;
 
-                if (act == 0)
+                if (act == 0 && _operator_email == operator_email)
                 {
                     try
                     {

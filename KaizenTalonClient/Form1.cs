@@ -28,12 +28,13 @@ namespace KaizenTalonClient
             _printer = Program.Printer;
 
             var host = System.Configuration.ConfigurationManager.AppSettings["url"];
-
+            var operator_email = System.Configuration.ConfigurationManager.AppSettings["operator"];
             _printer.mo_name = "Поликлиника №30";
 
             sProvider = new SignalRProvider()
             {
                 host = host,
+                operator_email = operator_email,
                 printer = _printer,
                 operator_name = _printer.mo_name,
                 IsActive = isActive
